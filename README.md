@@ -50,6 +50,7 @@
 
 - Utilização de promises
 - Utilização de bootstrap(sem modificar o core)
+- Utilização de SASS
 - Testes unitários(frontend e/ou backend)
 
 ## Observações
