@@ -46,7 +46,7 @@
 
 5. exportar a coleção hotel e substituir o arquivo /data/hotels.json
 
-## Diferencias
+## Diferenciais
 
 - Utilização de promises
 - Utilização de bootstrap(sem modificar o core)
@@ -54,7 +54,7 @@
 
 ## Observações
 
-- Em caso de dúvidas ou bug abra uma issue
+- Em caso de dúvidas abra uma issue
 
 ---
 
