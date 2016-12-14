@@ -1,29 +1,54 @@
-angular.module('app')
-    .service('hotelService', searchService);
+app.factory('HotelService', function ($http) {
 
-searchService.$inject = ['$http'];
+    return {
 
-function searchService($http) {
-    this.deleteHotel = function(tag) {
-        return $http({
-            url: '/api',
-            method: 'DELETE',
-            params: {}
-        });
-    };
+        deleteHotel: function (id) {
+            return $http({
+                url: '/api/hotel/' + id,
+                method: 'DELETE',
+                params: {}
+            });
+        },
 
-    this.updateHotel = function(tag) {
+        updateHotel: function (data) {
+            return $http({
+                url: '/api/hotel',
+                method: 'PUT',
+                params: data
+            });
+        },
 
-    };
+        getHotelByID: function (id) {
+            return $http({
+                url: '/api/hotel/' + id,
+                method: 'GET',
+                params: {}
+            });
+        },
 
-    this.getHotelByID = function(tag) {
+        insertHotel: function (data) {
+            return $http({
+                url: '/api/hotel/save',
+                method: 'POST',
+                params: data
+            });
+        },
 
-    };
+        getAllHotels: function () {
+            return $http({
+                url: '/api/hotel',
+                method: 'GET',
+                params: {}
+            });
+        },
 
-    this.insertHotel = function(tag) {
+        random: function () {
+            return $http({
+                url: '/api/hotel/random',
+                method: 'GET',
+                params: {}
+            });
+        },
+    }
 
-    };
-
-    this.getAllHotels = function(tag) {
-
-    };
+});

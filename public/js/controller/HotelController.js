@@ -1,35 +1,18 @@
-angular.module('app')
-    .controller('HotelController', LoginController);
+app.controller('HotelController', function($rootScope, $scope, HotelService){
 
-HotelController.$inject = ['$rootScope', '$state', '$filter', 'HotelService'];
+    $scope.init = function(){
 
-function HotelController($rootScope, $state, $filter, HotelService) {
-    var vm = this;
+        HotelService.random().then(function (res) {
 
-    //methods
-    vm.deleteHotel = deleteHotel;
-    vm.updateHotel = updateHotel;
-    vm.getHotelByID = getHotelByID;
-    vm.insertHotel = insertHotel;
-    vm.getAllHotels = getAllHotels;
+            console.log(res);
 
-    function deleteHotel() {
+        }, function (err) {
 
+            alert("Ops! Ocorreu um erro ao executar a ação.");
+
+            console.log(err);
+
+        });
     }
 
-    function updateHotel() {
-
-    }
-
-    function getHotelByID() {
-
-    }
-
-    function insertHotel() {
-
-    }
-
-    function getAllHotels() {
-
-    }
-}
+});
