@@ -1,35 +1,82 @@
-angular.module('app')
-    .controller('HotelController', LoginController);
+app.controller('HotelController', function($rootScope, $scope, HotelService){
 
-HotelController.$inject = ['$rootScope', '$state', '$filter', 'HotelService'];
+    $scope.deleteHotel = function(id){
 
-function HotelController($rootScope, $state, $filter, HotelService) {
-    var vm = this;
+    	HotelService.deleteHotel(id).then(function (res) {
 
-    //methods
-    vm.deleteHotel = deleteHotel;
-    vm.updateHotel = updateHotel;
-    vm.getHotelByID = getHotelByID;
-    vm.insertHotel = insertHotel;
-    vm.getAllHotels = getAllHotels;
+    		console.log(res);
 
-    function deleteHotel() {
+        }, function (err) {
+
+        	alert("Ops! Ocorreu um erro ao executar a ação.");
+
+            console.log(err);
+
+        });
+    }
+
+    $scope.updateHotel = function(data){
+
+    	HotelService.updateHotel(data).then(function (res) {
+
+    		console.log(res);
+
+        }, function (err) {
+
+        	alert("Ops! Ocorreu um erro ao executar a ação.");
+
+            console.log(err);
+
+        });
 
     }
 
-    function updateHotel() {
+    $scope.getHotelByID = function(id){
+
+    	HotelService.getHotelByID(id).then(function (res) {
+
+    		console.log(res);
+
+        }, function (err) {
+
+        	alert("Ops! Ocorreu um erro ao executar a ação.");
+
+            console.log(err);
+
+        });
 
     }
 
-    function getHotelByID() {
+    $scope.insertHotel = function(data){
+
+    	HotelService.insertHotel(data).then(function (res) {
+
+    		console.log(res);
+
+        }, function (err) {
+
+        	alert("Ops! Ocorreu um erro ao executar a ação.");
+
+            console.log(err);
+
+        });
 
     }
 
-    function insertHotel() {
+    $scope.getAllHotels = function(){
+
+    	HotelService.getAllHotels().then(function (res) {
+
+    		console.log(res);
+
+        }, function (err) {
+
+        	alert("Ops! Ocorreu um erro ao executar a ação.");
+
+            console.log(err);
+
+        });
 
     }
 
-    function getAllHotels() {
-
-    }
-}
+});
