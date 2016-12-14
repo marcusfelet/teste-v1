@@ -41,6 +41,14 @@ app.factory('HotelService', function ($http) {
                 params: {}
             });
         },
+
+        random: function () {
+            return $http({
+                url: '/api/hotel/random',
+                method: 'GET',
+                params: {}
+            });
+        },
     }
 
 });
