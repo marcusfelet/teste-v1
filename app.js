@@ -3,8 +3,6 @@
 const express = require('express'),
     app = express(),
     load = require('express-load'),
-    db = require('./app/mongo/mongoConnection'),
-    url = 'mongodb://localhost:27017/ttwgroup',
     bodyParser = require('body-parser'),
     compression = require('compression')
 
@@ -22,12 +20,17 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 load('routes', {
-    cwd: 'app'
-}).then('mongo').then('model').into(app)
+        cwd: 'app'
+    })
+    .then('config')
+    .then('mongo')
+    .then('model')
+    .into(app);
 
-process.db = db;
-
-db.connect(url, function(err) {
+console.log(app.model);
+console.log(app.config);
+/*
+db.connect(app.config.getDbURL(), function(err) {
     if (err) {
         console.log('We can\'t connect to mongo...')
         process.exit(1)
@@ -36,4 +39,6 @@ db.connect(url, function(err) {
             console.log('Let\'s book...')
         })
     }
-})
+});*/
+
+module.exports = app;
