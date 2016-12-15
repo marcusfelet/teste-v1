@@ -45,11 +45,24 @@ module.exports = function(app) {
 
     app.get('/api/hotels/', function(req, res) {
         let hotels = new app.model.Hotels();
-        hotels.pageList(req.params.page, req.params.qtd, (err, docs) => {
+
+        hotels.pageList(req.params.page, req.params.qtd)
+            .then(function(result){
+                res.status(404).json({
+                    msg: result
+                });
+            })
+            .catch(function (err) {
+                res.status(404).json({
+                    msg: 'implementation not found'
+                });
+            });
+
+        /*hotels.pageList(req.params.page, req.params.qtd, (err, docs) => {
             res.status(404).json({
                 msg: 'implementation not found'
             })
-        })
+        })*/
     })
 
 }

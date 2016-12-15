@@ -10,12 +10,45 @@ config.loadEnv()
     console.log(result);
 
     app.set('port', config.getPort());
-    return db.connect(config.getDbURL());
+    return db.open(config.getDbURL());
   })
   .then(function(result) {
+    
+    console.log('conn');
+    console.log(result);
 
+    const hotelsSchema = db.mongoose.Schema({
+    "_id": {
+          type: db.mongoose.Schema.Types.ObjectId
+      },
+    "hotel":{
+          type: String
+      },
+    "resort": {
+          type: String
+      },
+    "latitude": {
+          type: String
+      },
+    "longitude": {
+          type: String
+      },
+    "stars": {
+          type: String
+      },
+    "tags": {
+          type: String
+      },
+    "description": {
+          type: String
+      }
+    });
 
-    process.db = db;
+    var hotels = db.mongoose.model('hotels', hotelsSchema);
+
+    hotels.find().exec().then(function (argument) {
+      console.log(argument);
+    })
 
     console.log('Conectado com sucesso.');
     console.log('Iniciando o server.');
@@ -31,14 +64,37 @@ config.loadEnv()
       console.log('Arquivo de configuração não encontrado.');
       console.log('Deve ser criado na raiz do projeto com o nome "deploy.env".');
     }
-    else if (err.code === 18) {
+    else if (err.errno === -1945) {
       console.log('Não foi possível conectar.');
       console.log('Motivo: '+ err.message);
     }
     else
-       console.log(err);
+      console.log(err);
     process.exit();
   });
+
+/*
+db.on("open", function(ref) {
+  startServer();
+});
+
+db.on("error", function(err) {
+  console.log('Não foi possível conectar.');
+  console.log('Motivo: '+ err.message);
+   
+});
+
+function startServer() {
+  process.db = db;
+
+  console.log('Conectado com sucesso.');
+  console.log('Iniciando o server.');
+  server = http.createServer(app);
+  server.listen(config.getPort());
+  server.on('error', onError);
+  server.on('listening', onListening);
+
+};*/
 
 
 function onError(error) {

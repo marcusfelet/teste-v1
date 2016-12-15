@@ -5,29 +5,37 @@ function Hotels() {
     this._ObjectID = process.db.ObjectID()
 }
 
-Hotels.prototype.remove = function(id, cb) {
+Hotels.prototype.remove = function(id) {
+    
     //remove hotel
-    cb()
 }
 
-Hotels.prototype.update = function(hotel, cb) {
+Hotels.prototype.update = function(hotel) {
     //update hotel
-    cb()
 }
 
-Hotels.prototype.insert = function(hotel, cb) {
+Hotels.prototype.insert = function(hotel) {
     //insert hotel
-    cb()
 }
 
-Hotels.prototype.findById = function(id, cb) {
+Hotels.prototype.findById = function(id) {
     //find hotel by id
-    cb()
 }
 
-Hotels.prototype.pageList = function(page, qtd, cb) {
+Hotels.prototype.pageList = function(page, qtd) {
     //list all hotels
-    cb()
+    return new Promise(function (resolve, reject) {
+        console.log('Hotels._hotels');
+        let hotelsCollection = process.db.get().collection('hotels');
+        console.log(hotelsCollection);
+
+
+        let obj = {
+            db: process.db,
+            a: Hotels || 'z'
+        }
+        resolve(obj);
+    });
 }
 
 module.exports = function() {
