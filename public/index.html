@@ -2,79 +2,44 @@
 <html ng-app="app">
   <head>
     <title>Hoteis</title>
+    <link rel="stylesheet" href="bower/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bower/bootstrap/dist/css/bootstrap.min.css">
   </head>
   <body>
-      <h1>Lista de Hotel v{{(((5-4)+3)/2)*1}}</h1>
-
-      <div style="border-style: solid;float:left;margin-right:20px;width: 200px;">
-          <h2>Nome do Hotel</h2>
-          <h3>Resort hotel</h3>
-          <h4>Latitude x Longitude</h4>
-          <h5>5 estrelas</h5>
-          <hr></hr>
-          <h4>Tags</h4>
-          <ul>
-              <li>Hotel</li>
-              <li>Aspen</li>
-              <li>USA</li>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">HOTEIS</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#/">HOME</a></li>
+            <li><a href="#/search">BUSCA</a></li>
+            <li><a href="#/admin">ADMIN</a></li>
           </ul>
-          <hr></hr>
-          <h4>Descrição</h4>
-          <ul>
-              <li>Overview</li>
-              <li>About</li>
-              <li>Rooms</li>
-              <li>Amenities</li>
-          </ul>
+        </div>
       </div>
+    </nav>
 
-      <div style="border-style: solid;float:left;margin-right:20px;width: 200px;">
-          <h2>Nome do Hotel</h2>
-          <h3>Resort hotel</h3>
-          <h4>Latitude x Longitude</h4>
-          <h5>5 estrelas</h5>
-          <hr></hr>
-          <h4>Tags</h4>
-          <ul>
-              <li>Hotel</li>
-              <li>Aspen</li>
-              <li>USA</li>
-          </ul>
-          <hr></hr>
-          <h4>Descrição</h4>
-          <ul>
-              <li>Overview</li>
-              <li>About</li>
-              <li>Rooms</li>
-              <li>Amenities</li>
-          </ul>
-      </div>
+    <div class="container">
+      <ng-view>
 
-      <div style="border-style: solid;float:left;margin-right:20px;width: 200px;">
-          <h2>Nome do Hotel</h2>
-          <h3>Resort hotel</h3>
-          <h4>Latitude x Longitude</h4>
-          <h5>5 estrelas</h5>
-          <hr></hr>
-          <h4>Tags</h4>
-          <ul>
-              <li>Hotel</li>
-              <li>Aspen</li>
-              <li>USA</li>
-          </ul>
-          <hr></hr>
-          <h4>Descrição</h4>
-          <ul>
-              <li>Overview</li>
-              <li>About</li>
-              <li>Rooms</li>
-              <li>Amenities</li>
-          </ul>
-      </div>
+      </ng-view>
+    </div>
 
-      <script src="bower/angular.min.js"></script>
-      <script src="bower/angular-route.min.js"></script>
 
-      <script src="js/app.js"></script>
+    <script src="bower/jquery/dist/jquery.min.js"></script>
+    <script src="bower/angular/angular.min.js"></script>
+    <script src="bower/angular-route/angular-route.min.js"></script>
+
+
+    <script src="js/app.js"></script>
+    <script src="js/route/app.route.js"></script>
   </body>
 </html>
