@@ -3,12 +3,11 @@
 const mongoose   = require('mongoose');
 const config     = require('../config/config');
 mongoose.Promise = global.Promise;
-//const database  = mongoose.connect(config.getDbURL()).connection;
 
 module.exports = {
   mongoose: mongoose,
   open: open,
-
+  database: mongoose.connection
 };
 
 function open() {
@@ -22,14 +21,7 @@ function open() {
           errno: -1945,
           message: err.message
         });
-      })
-/*
-    var db = mongoose.connect(config.getDbURL(), function (err, conn) {
-      if (err)
-        reject(err);
-      else
-        resolve(db.connection);
-    });*/
+      });
   });
 };
 
@@ -74,7 +66,7 @@ exports.close = function() {
       state.db.close(function(err, result) {
         state.db = null
         state.mode = null
-        if (err) 
+        if (err)
           reject(err);
         else
           resolve();
@@ -83,6 +75,6 @@ exports.close = function() {
     else
       resolve();
   });
-  
+
 }
 */

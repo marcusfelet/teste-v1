@@ -1,54 +1,18 @@
 'use strict';
 const config = require('../app/config/config');
-const app = require('../app');
+const db     = require('../app/mongo/mongoConnection');
 const http = require('http');
-const db = require('../app/mongo/mongoConnection');
 var server = null;
-
+var app = null;
 config.loadEnv()
   .then(function (result) {
     console.log(result);
+    app = require('../app');
 
     app.set('port', config.getPort());
     return db.open(config.getDbURL());
   })
   .then(function(result) {
-    
-    console.log('conn');
-    console.log(result);
-
-    const hotelsSchema = db.mongoose.Schema({
-    "_id": {
-          type: db.mongoose.Schema.Types.ObjectId
-      },
-    "hotel":{
-          type: String
-      },
-    "resort": {
-          type: String
-      },
-    "latitude": {
-          type: String
-      },
-    "longitude": {
-          type: String
-      },
-    "stars": {
-          type: String
-      },
-    "tags": {
-          type: String
-      },
-    "description": {
-          type: String
-      }
-    });
-
-    var hotels = db.mongoose.model('hotels', hotelsSchema);
-
-    hotels.find().exec().then(function (argument) {
-      console.log(argument);
-    })
 
     console.log('Conectado com sucesso.');
     console.log('Iniciando o server.');
@@ -56,11 +20,9 @@ config.loadEnv()
     server.listen(config.getPort());
     server.on('error', onError);
     server.on('listening', onListening);
-
-
   })
   .catch(function (err) {
-    if (err.errno === -4058 ) {
+    if (err.code === 'ENOENT') {
       console.log('Arquivo de configuração não encontrado.');
       console.log('Deve ser criado na raiz do projeto com o nome "deploy.env".');
     }
@@ -72,30 +34,6 @@ config.loadEnv()
       console.log(err);
     process.exit();
   });
-
-/*
-db.on("open", function(ref) {
-  startServer();
-});
-
-db.on("error", function(err) {
-  console.log('Não foi possível conectar.');
-  console.log('Motivo: '+ err.message);
-   
-});
-
-function startServer() {
-  process.db = db;
-
-  console.log('Conectado com sucesso.');
-  console.log('Iniciando o server.');
-  server = http.createServer(app);
-  server.listen(config.getPort());
-  server.on('error', onError);
-  server.on('listening', onListening);
-
-};*/
-
 
 function onError(error) {
 

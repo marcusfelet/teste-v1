@@ -31,7 +31,7 @@ function loadEnv() {
         reject(err);
       }
       else {
-        let rows = data.split('\r\n');
+        let rows = data.split(/\r?\n/);
 
         for (let i = 0, len = rows.length; i < len; i++) {
           let keyValue = rows[i].split('=');
@@ -43,15 +43,3 @@ function loadEnv() {
     });
   });
 };
-/*
-loadEnv().then(function (argument) {
-  console.log(argument);
-})
-.catch(function(err) {
-  if (err.errno === -4058 ) {
-    console.log('Arquivo de configuração não encontrado.');
-    console.log('Deve ser criado na raiz do projeto com o nome "deploy.env".');
-  }
-  else
-    console.log(err);
-})*/
