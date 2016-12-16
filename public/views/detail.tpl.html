@@ -6,6 +6,10 @@
       <span class="label label-default">{{ tag }}</span>
     </p>
     <hr>
+    <p><i class="fa fa-map-marker" aria-hidden="true"></i>
+    {{ detailCtrl.hotel.latitude }} / {{ detailCtrl.hotel.longitude }}
+    </p>
+    <hr>
     <ul class="stars">
       <li><i ng-class="detailCtrl.getStar(1, detailCtrl.hotel.stars)" aria-hidden="true"></i></li>
       <li><i ng-class="detailCtrl.getStar(2, detailCtrl.hotel.stars)" aria-hidden="true"></i></li>

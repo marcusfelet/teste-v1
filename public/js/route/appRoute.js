@@ -38,12 +38,16 @@
         }
       })
       .when('/admin', {
-      /*  controller:  frontApp.modules.courses.controllers.courseDetail.name,
-        controllerAs:  frontApp.modules.courses.controllers.courseDetail.nameas,*/
+        controller: 'AdminController',
+        controllerAs: 'adminCtrl',
         templateUrl: 'views/admin.tpl.html',
         access: {
           requiresLogin: true
-
+        },
+        resolve: {
+          hotelsData: function (HotelService) {
+            return HotelService.getAll();
+          }
         }
       })
       .otherwise({redirectTo:'/'})
