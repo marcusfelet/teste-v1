@@ -38,3 +38,6 @@ jspm_packages
 
 # env
 *.env
+
+#bower dependences
+public/bower/*

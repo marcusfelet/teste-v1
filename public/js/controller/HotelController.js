@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('HotelController', LoginController);
+    .controller('HotelController', HotelController);
 
 HotelController.$inject = ['$rootScope', '$state', '$filter', 'HotelService'];
 
