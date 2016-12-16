@@ -1,29 +1,62 @@
 angular.module('app')
-    .service('hotelService', searchService);
+    .service('HotelService', hotelService);
 
-searchService.$inject = ['$http'];
+hotelService.$inject = ['RequestService', 'URLAPI'];
 
-function searchService($http) {
-    this.deleteHotel = function(tag) {
-        return $http({
-            url: '/api',
-            method: 'DELETE',
-            params: {}
-        });
-    };
+function hotelService(RequestService, URLAPI) {
+  var service = {
+      create: create,
+      update: update,
+      remove: remove,
+      getAll: getAll,
+      getById: getById
+  };
+  return service;
 
-    this.updateHotel = function(tag) {
+  function create(hotel) {
+    return RequestService.request(
+      'POST',
+      URLAPI.POSTHOTEL,
+      {}
+      );
+  };
 
-    };
+  function update(hotel) {
+    return RequestService.request(
+      'PUT',
+      URLAPI.PUTHOTEL,
+      {}
+      );
 
-    this.getHotelByID = function(tag) {
+    /*return $http({
+        url: '/api/hotel',
+        method: 'PUT',
+        params: {}
+    });*/
+  };
 
-    };
+  function remove(id) {
+    return RequestService.request(
+      'DELETE',
+      URLAPI.DELETEHOTEL + id,
+      {}
+      );
+  };
 
-    this.insertHotel = function(tag) {
+  function getAll() {
+    return RequestService.request(
+      'GET',
+      URLAPI.GETHOTEL, 
+      {}
+      );
+  };
 
-    };
+  function getById(id) {
+    return RequestService.request(
+      'GET',
+      URLAPI.GETHOTELID + id, 
+      {}
+      );
+  };
+};
 
-    this.getAllHotels = function(tag) {
-
-    };
