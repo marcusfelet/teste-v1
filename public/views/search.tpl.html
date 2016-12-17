@@ -10,12 +10,13 @@
 </div>
 <div class="row">
   <div class="col-lg-4" ng-repeat="r in searchCtrl.gridList">
-    
+
     <h2>{{ r.hotel }}</h2>
     <p>{{ r.resort }}</p>
     <p class="col-lg-4" ng-repeat="tag in r.tags">
       <span class="label label-default">{{ tag }}</span>
     </p>
+    <br>
     <hr>
     <ul class="stars">
       <li><i ng-class="searchCtrl.getStar(1, r.stars)" aria-hidden="true"></i></li>
@@ -30,4 +31,3 @@
     <p><button class="btn btn-primary" ng-click="searchCtrl.moreDetail(r._id)" role="button">Mais</button></p>
   </div>
 </div>
-

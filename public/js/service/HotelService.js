@@ -17,7 +17,7 @@ function hotelService(RequestService, URLAPI) {
     return RequestService.request(
       'POST',
       URLAPI.POSTHOTEL,
-      {}
+      hotel
       );
   };
 
@@ -25,7 +25,7 @@ function hotelService(RequestService, URLAPI) {
     return RequestService.request(
       'PUT',
       URLAPI.PUTHOTEL,
-      {}
+      hotel
       );
 
     /*return $http({
@@ -46,7 +46,7 @@ function hotelService(RequestService, URLAPI) {
   function getAll() {
     return RequestService.request(
       'GET',
-      URLAPI.GETHOTEL, 
+      URLAPI.GETHOTEL,
       {}
       );
   };
@@ -54,9 +54,8 @@ function hotelService(RequestService, URLAPI) {
   function getById(id) {
     return RequestService.request(
       'GET',
-      URLAPI.GETHOTELID + id, 
+      URLAPI.GETHOTELID + id,
       {}
       );
   };
 };
-

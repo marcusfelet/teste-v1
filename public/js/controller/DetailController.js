@@ -10,11 +10,10 @@
     vm.hotel = hotelsData.data.msg;
     vm.getStar = getStar;
 
-    console.log(vm.hotel);
 
     function getStar(indice, star) {
       return (star >= indice ) ? 'fa fa-star' : 'fa fa-star-o';
     };
-    
+
   };
 }(angular));

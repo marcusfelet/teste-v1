@@ -20,6 +20,7 @@ module.exports = function(app) {
     });
 
     app.put('/api/hotel/', function(req, res) {
+
       let _id = req.body.id;
       let description = req.body.description || {};
       let newHoteldescription = {
