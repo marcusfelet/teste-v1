@@ -8,7 +8,8 @@ module.exports = {
   insert: insert,
   findById: findById,
   pageList: pageList,
-  validate: validate
+  validate: validate,
+  pageRandom: pageRandom
 };
 
 //remove hotel
@@ -43,7 +44,29 @@ function findById(id) {
 
 //list all hotels
 function pageList() {
-    return hotel.collection.find({}).exec();
+  return hotel.collection.find({}).exec();
+};
+
+//list hotels random
+function pageRandom() {
+  return new Promise(function (resolve, reject) {
+    hotel.collection.count().exec()
+    .then(function (count) {
+      let rand = Math.floor(Math.random() * count);
+      if ((count - rand) < 3)
+        rand = 0;
+
+      return hotel.collection.find({}).limit(3)
+        .skip(rand)
+        .exec()
+    })
+    .then(function (docs) {
+      resolve(docs);
+    })
+    .catch(function (err) {
+      reject(err);
+    })
+  });
 };
 
 function result(pcampo, pmessage) {

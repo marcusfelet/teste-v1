@@ -10,7 +10,8 @@ function hotelService(RequestService, URLAPI) {
       remove: remove,
       getAll: getAll,
       getById: getById,
-      validate: validate
+      validate: validate,
+      getRand: getRand
   };
   return service;
 
@@ -88,6 +89,14 @@ function hotelService(RequestService, URLAPI) {
     return RequestService.request(
       'GET',
       URLAPI.GETHOTEL,
+      {}
+      );
+  };
+
+  function getRand() {
+    return RequestService.request(
+      'GET',
+      URLAPI.GETHOTELRAND,
       {}
       );
   };

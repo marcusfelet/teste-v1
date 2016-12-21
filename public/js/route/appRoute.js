@@ -13,7 +13,7 @@
         templateUrl: 'views/home.tpl.html',
         resolve: {
           hotelsData: function (HotelService) {
-            return HotelService.getAll();
+            return HotelService.getRand();
           }
         }
       })

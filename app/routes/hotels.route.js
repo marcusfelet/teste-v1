@@ -127,4 +127,18 @@ module.exports = function(app) {
             });
     });
 
+    app.get('/api/hotels/grid', function(req, res) {
+        hotelModel.pageRandom()
+            .then(function(result){
+                res.status(200).json({
+                    msg: result
+                });
+            })
+            .catch(function (err) {
+                res.status(404).json({
+                    msg: err
+                });
+            });
+    });
+
 }
