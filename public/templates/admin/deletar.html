@@ -1,0 +1,31 @@
+
+    <h1>Lista de Hotels</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome do Hotel</th>
+                <th>Resort hotel</th>
+                <th>Latitude x Longitude</th>
+                <th>Estrelas</th>
+                <th>Tags</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, value) in hotels">
+                <td>{{key}}</td>
+                <td>{{value.hotel}}</td>
+                <td>{{value.resort}}</td>
+                <td>{{value.latitude}}X{{value.longitude}}</td>
+                <td>{{value.stars}}</td>
+                <td>
+                    <a ng-href="/#/admin/editar/{{key}}" class="btn btn-info">Editar</a>
+                    <a ng-href="/#/admin/deletar/{{key}}" class="btn btn-danger">Deletar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="" class="btn btn-success">Cadastrar</a>

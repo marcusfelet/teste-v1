@@ -1,0 +1,31 @@
+
+    <h1>Lista de Hotels</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome do Hotel</th>
+                <th>Resort hotel</th>
+                <th>Latitude x Longitude</th>
+                <th>Estrelas</th>
+                <th>Tags</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="(key, value) in hotels">
+                <td>{{value._id}}</td>
+                <td>{{value.hotel}}</td>
+                <td>{{value.resort}}</td>
+                <td>{{value.latitude}}X{{value.longitude}}</td>
+                <td>{{value.stars}}</td>
+                <td>
+                    <a href="javascript:void(0)" ng-click="getHotelByID(value._id)" class="btn btn-info">Editar</a>
+                    <a href="javascript:void(0)" ng-click="deleteHotel(value._id)" class="btn btn-danger">Deletar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a ng-href="/#/admin/cadastrar" class="btn btn-success">Cadastrar</a>
