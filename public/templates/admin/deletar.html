@@ -14,15 +14,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr ng-repeat="(key, value) in hotels">
+                <td>{{key}}</td>
+                <td>{{value.hotel}}</td>
+                <td>{{value.resort}}</td>
+                <td>{{value.latitude}}X{{value.longitude}}</td>
+                <td>{{value.stars}}</td>
                 <td>
-                    <a href="" class="btn btn-info">Editar</a>
-                    <a href="" class="btn btn-danger">Deletar</a>
+                    <a ng-href="/#/admin/editar/{{key}}" class="btn btn-info">Editar</a>
+                    <a ng-href="/#/admin/deletar/{{key}}" class="btn btn-danger">Deletar</a>
                 </td>
             </tr>
         </tbody>

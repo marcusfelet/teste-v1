@@ -1,22 +1,22 @@
 
-    <div class="jumbotron">
-        <h2>Nome do Hotel</h2>
-        <h3>Resort hotel</h3>
-        <h4>Latitude x Longitude</h4>
-        <h5>5 estrelas</h5>
+    <div ng-repeat="(key, value) in hotels" class="col-md-3 jumbotron" style="margin-right:10px;">
+        <h2>{{value.hotel}}</h25
+        <h3>{{value.resort}}</h3>
+        <h4>{{value.latitude}} x {{value.longitude}}</h4>
+        <h5>{{value.stars}} estrelas</h5>
         <hr></hr>
         <h4>Tags</h4>
         <ul>
-            <li>Hotel</li>
-            <li>Aspen</li>
-            <li>USA</li>
+            <li>{{value.tags[0]}}</li>
+            <li>{{value.tags[1]}}</li>
+            <li>{{value.tags[2]}}</li>
         </ul>
         <hr></hr>
         <h4>Descrição</h4>
         <ul>
-            <li>Overview</li>
-            <li>About</li>
-            <li>Rooms</li>
-            <li>Amenities</li>
+            <li>{{value.description.overview}}</li>
+            <li>{{value.description.about}}</li>
+            <li>{{value.description.rooms}}</li>
+            <li>{{value.description.amenities}}</li>
         </ul>
     </div>
