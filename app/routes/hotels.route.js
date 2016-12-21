@@ -6,7 +6,10 @@ module.exports = function(app) {
     app.delete('/api/hotel/:id', function(req, res) {
         let param = req.params.id || '-1';
 
-        hotelModel.remove(req.params.id)
+        hotelModel.validate(param, {}, 'DELETE')
+           .then(function (result) {
+             return hotelModel.remove(param);
+           })
           .then(function(result) {
             res.status(200).json({
                 msg: result
@@ -14,7 +17,7 @@ module.exports = function(app) {
           })
           .catch(function(err) {
             res.status(400).json({
-                msg: err.message
+                msg: err
             });
           });
     });
@@ -40,7 +43,10 @@ module.exports = function(app) {
         description: newHoteldescription
       };
 
-      hotelModel.update(_id, newHotel)
+      hotelModel.validate(_id, newHotel, 'UPDATE')
+         .then(function (result) {
+           return hotelModel.update(_id, newHotel);
+         })
         .then(function(result) {
           res.status(200).json({
             msg: result
@@ -48,7 +54,7 @@ module.exports = function(app) {
         })
         .catch(function(err) {
           res.status(400).json({
-            msg: err.message
+            msg: err
           });
         });
     });
@@ -72,7 +78,10 @@ module.exports = function(app) {
         description: newHoteldescription
       };
 
-      hotelModel.insert(newHotel)
+      hotelModel.validate('', newHotel, 'NEW')
+        .then(function (result) {
+          return hotelModel.insert(newHotel);
+        })
         .then(function(result) {
           res.status(200).json({
               msg: result
@@ -80,14 +89,18 @@ module.exports = function(app) {
         })
         .catch(function(err) {
           res.status(400).json({
-              msg: err.message
+              msg: err
           });
         });
     });
 
     app.get('/api/hotel/:id', function(req, res) {
         let param = req.params.id || '-1';
-        hotelModel.findById(param)
+
+        hotelModel.validate(param, {}, 'SELECT')
+           .then(function (result) {
+             return hotelModel.findById(param);
+           })
           .then(function (doc) {
             res.status(200).json({
                 msg: doc
@@ -95,13 +108,13 @@ module.exports = function(app) {
           })
           .catch(function (err) {
               res.status(404).json({
-                  msg: 'implementation not found'
+                  msg: err
               });
           });
     });
 
     app.get('/api/hotels/', function(req, res) {
-        hotelModel.pageList(req.params.page, req.params.qtd)
+        hotelModel.pageList()
             .then(function(result){
                 res.status(200).json({
                     msg: result
@@ -109,7 +122,7 @@ module.exports = function(app) {
             })
             .catch(function (err) {
                 res.status(404).json({
-                    msg: 'implementation not found'
+                    msg: err
                 });
             });
     });
