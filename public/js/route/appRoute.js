@@ -41,9 +41,6 @@
         controller: 'AdminController',
         controllerAs: 'adminCtrl',
         templateUrl: 'views/admin.tpl.html',
-        access: {
-          requiresLogin: true
-        },
         resolve: {
           hotelsData: function (HotelService) {
             return HotelService.getAll();

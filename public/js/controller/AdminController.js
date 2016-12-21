@@ -2,11 +2,12 @@
   angular.module('app')
     .controller('AdminController', adminController);
 
-  adminController.$inject = ['hotelsData', 'HotelService'];
+  adminController.$inject = ['$scope', '$timeout', 'hotelsData', 'HotelService'];
 
-  function adminController(hotelsData, HotelService) {
+  function adminController($scope, $timeout, hotelsData, HotelService) {
     var vm = this;
     var actualIndex = -1;
+    var lstErrorsTemp = [];
 
     vm.gridList = hotelsData.data.msg;
     vm.btnNew = btnNew;
@@ -15,7 +16,7 @@
     vm.btnRemove = btnRemove;
     vm.btnCancel = btnCancel;
     vm.btnConfirmDelete = btnConfirmDelete;
-    vm.lstMsgErrors = [{message:'hhuh'}];
+    vm.lstMsgErrors = [];
 
     vm.state = 'GRID';
     vm.actualHotel = {
@@ -67,12 +68,25 @@
     };
 
     function btnEdit(photel, pindex) {
+      vm.lstMsgErrors = [];
       vm.state = 'EDIT';
       actualIndex = pindex;
       loadActualHotel(photel);
     };
 
+    function updateHotel(photel) {
+      vm.gridList[actualIndex]._id = photel.id;
+      vm.gridList[actualIndex].hotel = photel.hotel;
+      vm.gridList[actualIndex].resort = photel.resort;
+      vm.gridList[actualIndex].latitude = photel.latitude;
+      vm.gridList[actualIndex].longitude = photel.longitude;
+      vm.gridList[actualIndex].stars = photel.stars;
+      vm.gridList[actualIndex].tags = photel.tags;
+      vm.gridList[actualIndex].description = photel.description;
+    }
+
     function btnSave() {
+      vm.lstMsgErrors = [];
 
       var newHotel = {
         id: vm.actualHotel._id,
@@ -91,55 +105,34 @@
       };
       newHotel.tags = vm.actualHotel.tags.split(',');
 
-
-      if (actualIndex === -1) {
-        HotelService.validate(newHotel)
-          .then(function (result) {
+      HotelService.validate(newHotel)
+        .then(function (result) {
+          if (actualIndex === -1)
             return HotelService.create(newHotel);
-          })
-          .then(function (result) {
-            console.log('result.data.msg');
-            console.log(result.data.msg);
-            vm.gridList.push(result.data.msg);
-            btnCancel();
-          })
-          .catch(function (err) {
-            console.log(err);
-            if (err.hasOwnProperty('status')) {
-              vm.lstMsgErrors.push('sdsda');
-              //vm.lstMsgErrors = err.messages;
-              console.log(vm.lstMsgErrors);
-            }
-
-          });
-      }
-      else {
-        HotelService.validate(newHotel)
-          .then(function (result) {
+          else
             return HotelService.update(newHotel);
-          })
-          .then(function (result) {
-            var hotelresult = result.data.msg;
-            vm.gridList[actualIndex]._id = hotelresult.id;
-            vm.gridList[actualIndex].hotel = hotelresult.hotel;
-            vm.gridList[actualIndex].resort = hotelresult.resort;
-            vm.gridList[actualIndex].latitude = hotelresult.latitude;
-            vm.gridList[actualIndex].longitude = hotelresult.longitude;
-            vm.gridList[actualIndex].stars = hotelresult.stars;
-            vm.gridList[actualIndex].tags = hotelresult.tags;
-            vm.gridList[actualIndex].description = hotelresult.description;
-            hotelresult = null;
+        })
+        .then(function (result) {
+          $scope.$apply(function() {
+            if (actualIndex === -1)
+              vm.gridList.push(result.data.msg);
+            else
+              updateHotel(result.data.msg);
             btnCancel();
-          })
-          .catch(function (err) {
-            if (err.hasOwnProperty('status')) {
-              vm.lstMsgErrors = err.messages
-            }
-            console.log(err);
           });
-      }
-
-
+        })
+        .catch(function (err) {
+          $scope.$apply(function() {
+            if (err.hasOwnProperty('status')) {
+                vm.lstMsgErrors = err.messages;
+            }
+            else {
+              vm.lstMsgErrors.push({
+                message: err.data.msg
+              });
+            }
+          });
+        });
     };
 
     function btnRemove(photel, pindex) {
@@ -151,6 +144,7 @@
     function btnCancel() {
       vm.state = 'GRID';
       actualIndex = -1;
+      vm.lstMsgErrors = [];
       clearActualHotel();
     };
 
