@@ -15,15 +15,16 @@
     vm.btnRemove = btnRemove;
     vm.btnCancel = btnCancel;
     vm.btnConfirmDelete = btnConfirmDelete;
+    vm.lstMsgErrors = [{message:'hhuh'}];
 
     vm.state = 'GRID';
     vm.actualHotel = {
       _id: '',
       hotel: '',
       resort: '',
-      latitude: 0,
-      longitude: 0,
-      stars: 0,
+      latitude: '',
+      longitude: '',
+      stars: '',
       tags: '',
       overview: '',
       about: '',
@@ -35,9 +36,9 @@
       vm.actualHotel._id = '';
       vm.actualHotel.hotel = '';
       vm.actualHotel.resort = '';
-      vm.actualHotel.latitude = 0;
-      vm.actualHotel.longitude = 0;
-      vm.actualHotel.stars = 0;
+      vm.actualHotel.latitude = '';
+      vm.actualHotel.longitude = '';
+      vm.actualHotel.stars = '';
       vm.actualHotel.tags = '';
       vm.actualHotel.overview = '';
       vm.actualHotel.about = '';
@@ -90,8 +91,12 @@
       };
       newHotel.tags = vm.actualHotel.tags.split(',');
 
+
       if (actualIndex === -1) {
-        HotelService.create(newHotel)
+        HotelService.validate(newHotel)
+          .then(function (result) {
+            return HotelService.create(newHotel);
+          })
           .then(function (result) {
             console.log('result.data.msg');
             console.log(result.data.msg);
@@ -100,13 +105,20 @@
           })
           .catch(function (err) {
             console.log(err);
+            if (err.hasOwnProperty('status')) {
+              vm.lstMsgErrors.push('sdsda');
+              //vm.lstMsgErrors = err.messages;
+              console.log(vm.lstMsgErrors);
+            }
 
           });
       }
       else {
-        HotelService.update(newHotel)
+        HotelService.validate(newHotel)
           .then(function (result) {
-
+            return HotelService.update(newHotel);
+          })
+          .then(function (result) {
             var hotelresult = result.data.msg;
             vm.gridList[actualIndex]._id = hotelresult.id;
             vm.gridList[actualIndex].hotel = hotelresult.hotel;
@@ -120,8 +132,10 @@
             btnCancel();
           })
           .catch(function (err) {
+            if (err.hasOwnProperty('status')) {
+              vm.lstMsgErrors = err.messages
+            }
             console.log(err);
-
           });
       }
 
