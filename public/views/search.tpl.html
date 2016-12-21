@@ -2,14 +2,13 @@
   <div class="col-lg-12">
     <form class="navbar-form navbar-left">
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Buscar">
+        <input type="text" ng-model="searchCtrl.searchStr" class="form-control" placeholder="Buscar">
       </div>
-      <button type="submit" class="btn btn-default">Buscar</button>
     </form>
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-4" ng-repeat="r in searchCtrl.gridList">
+  <div class="col-lg-4" ng-repeat="r in searchCtrl.gridList|filter:searchCtrl.searchStr">
 
     <h2>{{ r.hotel }}</h2>
     <p>{{ r.resort }}</p>
