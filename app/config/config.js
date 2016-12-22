@@ -20,7 +20,7 @@ function getPort() {
 
 // retorna a url do mongo
 function getDbURL() {
-  return process.env.MONGO_DB || 'mongodb://localhost:27017/test-v1-hotels';
+  return process.env.MONGO_DB || 'mongodb://localhost:27017/ttwgroup';
 };
 
 // Carrega variáveis de ambiente

@@ -76,6 +76,10 @@ function result(pcampo, pmessage) {
   };
 };
 
+function isNumber(pnum) {
+  return (!isNaN(parseFloat(pnum)) && isFinite(pnum));
+};
+
 function validate(id, photel, pstatus) {
   return new Promise(function (resolve, reject) {
     let lstResult = [];
@@ -96,10 +100,26 @@ function validate(id, photel, pstatus) {
         lstResult.push(result('resort', 'Campo Resort é obrigatório'));
       if (!photel.latitude)
         lstResult.push(result('latitude', 'Campo Latitude é obrigatório'));
+      else {
+        if (!isNumber(photel.latitude))
+          lstResult.push(result('latitude', 'Campo Latitude somente permite números'));
+      }
       if (!photel.longitude)
         lstResult.push(result('longitude', 'Campo Longitude é obrigatório'));
+      else {
+        if (!isNumber(photel.longitude))
+          lstResult.push(result('longitude', 'Campo Longitude somente permite números'));
+      }
       if (!photel.stars)
         lstResult.push(result('stars', 'Campo Estrelas é obrigatório'));
+      else {
+        if (!isNumber(photel.stars))
+          lstResult.push(result('stars', 'Campo Estrelas somente permite números'));
+        else {
+          if ((photel.stars < 1) || (photel.stars > 5))
+            lstResult.push(result('stars', 'Campo Estrelas somente permite números entre 1 e 5'));
+        }
+      }
       if (!photel.tags)
         lstResult.push(result('tags', 'Campo Tags é obrigatório'));
       if (!photel.description.overview)
