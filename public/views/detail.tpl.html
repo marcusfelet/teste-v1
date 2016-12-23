@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-lg-12">    
+    <h2>{{ detailCtrl.hotel.hotel }}</h2>
+    <p>{{ detailCtrl.hotel.resort }}</p>
+    <p class="col-lg-4" ng-repeat="tag in detailCtrl.hotel.tags">
+      <span class="label label-default">{{ tag }}</span>
+    </p>
+    <br>
+    <hr>
+    <p><i class="fa fa-map-marker" aria-hidden="true"></i>
+    {{ detailCtrl.hotel.latitude }} / {{ detailCtrl.hotel.longitude }}
+    </p>
+    <hr>
+    <ul class="stars">
+      <li><i ng-class="detailCtrl.getStar(1, detailCtrl.hotel.stars)" aria-hidden="true"></i></li>
+      <li><i ng-class="detailCtrl.getStar(2, detailCtrl.hotel.stars)" aria-hidden="true"></i></li>
+      <li><i ng-class="detailCtrl.getStar(3, detailCtrl.hotel.stars)" aria-hidden="true"></i></li>
+      <li><i ng-class="detailCtrl.getStar(4, detailCtrl.hotel.stars)" aria-hidden="true"></i></li>
+      <li><i ng-class="detailCtrl.getStar(5, detailCtrl.hotel.stars)" aria-hidden="true"></i></li>
+    </ul>
+    <hr>
+    <p ng-bind="detailCtrl.hotel.description.overview"></p>
+    <hr>
+    <p ng-bind="detailCtrl.hotel.description.about"></p>
+    <hr>
+    <p ng-bind="detailCtrl.hotel.description.rooms"></p>
+    <hr>
+    <p ng-bind="detailCtrl.hotel.description.amenities"></p>
+  </div>
+</div>

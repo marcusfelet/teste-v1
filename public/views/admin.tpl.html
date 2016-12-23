@@ -1,0 +1,104 @@
+<div class="row">
+  <div class="col-lg-12">
+    <form class="form-horizontal" ng-show="adminCtrl.state == 'EDIT'">
+      <div ng-repeat="r in adminCtrl.lstMsgErrors" class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ r.message }}
+      </div>
+      <div class="form-group">
+        <label for="txthotel">Nome</label>
+        <input type="text" class="form-control" id="txthotel" ng-model="adminCtrl.actualHotel.hotel" placeholder="Nome">
+      </div>
+      <div class="form-group">
+        <label for="txtresort">Resort</label>
+        <input type="text" class="form-control" id="txtresort" ng-model="adminCtrl.actualHotel.resort" placeholder="Resort">
+      </div>
+      <div class="form-group">
+        <label for="txtlatitude">Latitude</label>
+        <input type="text" class="form-control" id="txtlatitude" ng-model="adminCtrl.actualHotel.latitude" placeholder="Latitude">
+      </div>
+      <div class="form-group">
+        <label for="txtlongitude">longitude</label>
+        <input type="text" class="form-control" id="txtlongitude" ng-model="adminCtrl.actualHotel.longitude" placeholder="longitude">
+      </div>
+      <div class="form-group">
+        <label for="txtstars">Estrelas</label>
+        <input type="text" class="form-control" id="txtstars" ng-model="adminCtrl.actualHotel.stars" placeholder="Estrelas">
+      </div>
+      <div class="form-group">
+        <label for="txttags">Tags</label>
+        <input type="text" class="form-control" id="txttags" ng-model="adminCtrl.actualHotel.tags" placeholder="Tags">
+      </div>
+      <div class="form-group">
+        <label for="txtoverview">Visão Geral</label>
+        <input type="text" class="form-control" id="txtoverview" ng-model="adminCtrl.actualHotel.overview" placeholder="Visão Geral">
+      </div>
+      <div class="form-group">
+        <label for="txtabout">Sobre</label>
+        <input type="text" class="form-control" id="txtabout" ng-model="adminCtrl.actualHotel.about" placeholder="Sobre">
+      </div>
+      <div class="form-group">
+        <label for="txtrooms">Quartos</label>
+        <input type="text" class="form-control" id="txtrooms" ng-model="adminCtrl.actualHotel.rooms" placeholder="Quartos">
+      </div>
+      <div class="form-group">
+        <label for="txtamenities">Cortesias</label>
+        <input type="text" class="form-control" id="txtamenities" ng-model="adminCtrl.actualHotel.amenities" placeholder="Cortesias">
+      </div>
+
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" ng-click="adminCtrl.btnSave()">Salvar</button>
+        <button type="button" class="btn btn-warning" ng-click="adminCtrl.btnCancel()">Cancelar</button>
+      </div>
+    </form>
+
+    <form ng-show="adminCtrl.state=='DELETE'">
+      <p>Confirma a exclusão do registro ?</p>
+      <p ng-bind="adminCtrl.actualHotel.hotel"></p>
+      <button type="button" class="btn btn-danger" ng-click="adminCtrl.btnConfirmDelete()">Sim</button>
+      <button type="button" class="btn btn-warning" ng-click="adminCtrl.btnCancel()">Não</button>
+    </form>
+
+    <div class="table-responsive" ng-show="adminCtrl.state=='GRID'">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th width="20%">
+              <button class="btn btn-primary" ng-click="adminCtrl.btnNew()">
+                <i class="fa fa-pencil" aria-hidden="true"></i> Novo
+              </button>
+            </th>
+            <th>
+              <i class="fa fa-address-card" aria-hidden="true"></i> Nome
+            </th>
+            <th>
+              <i class="fa fa-globe" aria-hidden="true"></i> Resort
+            </th>
+            <th>
+              <i class="fa fa-map-marker" aria-hidden="true"></i> Localização
+            </th>
+            <th>
+              <i class="fa fa-star" aria-hidden="true"></i> Estrelas
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="r in adminCtrl.gridList">
+            <td>
+              <button class="btn btn-default" ng-click="adminCtrl.btnEdit(r, $index)">
+                <i class="fa fa-pencil" aria-hidden="true"></i> Editar
+              </button>
+              <button class="btn btn-danger" ng-click="adminCtrl.btnRemove(r, $index)">
+                <i class="fa fa-trash-o" aria-hidden="true"></i> Excluir
+              </button>
+            </td>
+            <td ng-bind="r.hotel"></td>
+            <td ng-bind="r.resort"></td>
+            <td ng-bind="r.hotel"></td>
+            <td ng-bind="r.stars"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
