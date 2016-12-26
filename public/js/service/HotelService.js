@@ -4,31 +4,31 @@ app.factory('HotelService', function ($http) {
 
         deleteHotel: function (id) {
             return $http({
-                url: '/api/hotel/' + id,
-                method: 'DELETE',
-                params: {}
+                url: '/delete',
+                method: 'GET',
+                params: {id: id}
             });
         },
 
         updateHotel: function (data) {
             return $http({
-                url: '/api/hotel',
-                method: 'PUT',
+                url: '/update',
+                method: 'POST',
                 params: data
             });
         },
 
         getHotelByID: function (id) {
             return $http({
-                url: '/api/hotel/' + id,
+                url: '/get',
                 method: 'GET',
-                params: {}
+                params: {id: id}
             });
         },
 
         insertHotel: function (data) {
             return $http({
-                url: '/api/hotel/save',
+                url: '/save',
                 method: 'POST',
                 params: data
             });
@@ -36,7 +36,7 @@ app.factory('HotelService', function ($http) {
 
         getAllHotels: function () {
             return $http({
-                url: '/api/hotel',
+                url: '/list',
                 method: 'GET',
                 params: {}
             });
@@ -44,7 +44,7 @@ app.factory('HotelService', function ($http) {
 
         random: function () {
             return $http({
-                url: '/api/hotel/random',
+                url: '/random',
                 method: 'GET',
                 params: {}
             });

@@ -1,16 +1,16 @@
 app.controller('AdminController', function($rootScope, $scope, $location, HotelService, $state, $stateParams){
 
-    $scope.updateHotel = function(data){
+    $scope.updateHotel = function(){
 
-        HotelService.updateHotel(data).then(function (res) {
+        HotelService.updateHotel($scope.data).then(function (res) {
 
-            console.log(res);
+            $state.go("admin");
 
         }, function (err) {
 
             swal({
                 title: "Ops!",
-                text: '<p>Falta implementar a api...</p>',
+                text: '<p>Erro interno!!!</p>',
                 html:true,
                 allowEscapeKey: true,
                 showConfirmButton: true,
@@ -32,17 +32,19 @@ app.controller('AdminController', function($rootScope, $scope, $location, HotelS
 
     $scope.getHotelByID = function(id){
 
-        HotelService.getHotelByID(id).then(function (res) {
-    
-            $scope.data = res;
+        console.log(id);
 
-            $state.go("editar", {id:_id});
+        HotelService.getHotelByID(id).then(function (res) {
+                
+            $scope.data = res.data[0];
+
+            $state.go("editar", {id: id});
 
         }, function (err) {
 
             swal({
                 title: "Ops!",
-                text: '<p>Falta implementar a api...</p>',
+                text: '<p>Erro interno!!!</p>',
                 html:true,
                 allowEscapeKey: true,
                 showConfirmButton: true,
@@ -66,13 +68,13 @@ app.controller('AdminController', function($rootScope, $scope, $location, HotelS
 
         HotelService.insertHotel($scope.data).then(function (res) {
 
-            console.log(res);
+            $state.go("admin");
 
         }, function (err) {
 
             swal({
                 title: "Ops!",
-                text: '<p>Falta implementar a api...</p>',
+                text: '<p>Erro interno!!!</p>',
                 html:true,
                 allowEscapeKey: true,
                 showConfirmButton: true,
@@ -96,13 +98,13 @@ app.controller('AdminController', function($rootScope, $scope, $location, HotelS
 
         HotelService.getAllHotels().then(function (res) {
 
-            console.log(res);
+            $rootScope.hotels = res.data;
 
         }, function (err) {
 
             swal({
                 title: "Ops!",
-                text: '<p>Falta implementar a api...</p>',
+                text: '<p>Erro interno!!!</p>',
                 html:true,
                 allowEscapeKey: true,
                 showConfirmButton: true,
@@ -115,8 +117,6 @@ app.controller('AdminController', function($rootScope, $scope, $location, HotelS
                     //document.location.reload();
                 }
             });
-
-            console.log(err);
 
         });
 
@@ -128,57 +128,11 @@ app.controller('AdminController', function($rootScope, $scope, $location, HotelS
 
         $scope.data = [];
 
-        $rootScope.hotels.push({
-            "_id" : 0,
-            "hotel": "Hotel Aspen",
-            "resort": "Aspen",
-            "latitude": 6.62,
-            "longitude": -89.0,
-            "stars": 4,
-            "tags": ["hotel", "aspen", "usa"],
-            "description": {
-                "overview": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "about": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "rooms": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "amenities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            }
-        });
-
-        $rootScope.hotels.push({
-            "_id" : 1,
-            "hotel": "Hotel Aspen",
-            "resort": "Aspen",
-            "latitude": 6.62,
-            "longitude": -89.0,
-            "stars": 5,
-            "tags": ["hotel", "aspen", "usa"],
-            "description": {
-                "overview": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "about": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "rooms": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "amenities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            }
-        });
-
-        $rootScope.hotels.push({
-            "_id" : 2,
-            "hotel": "Hotel Aspen",
-            "resort": "Aspen",
-            "latitude": 6.62,
-            "longitude": -89.0,
-            "stars": 6,
-            "tags": ["hotel", "aspen", "usa"],
-            "description": {
-                "overview": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "about": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "rooms": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                "amenities": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            }
-        });
-
         if ($stateParams.id) {
             $scope.getHotelByID($stateParams.id);
         }
+
+        $scope.getAllHotels();
     }
 
     $scope.init();
@@ -186,33 +140,9 @@ app.controller('AdminController', function($rootScope, $scope, $location, HotelS
 
     $scope.deleteHotel = function(id){
 
-        HotelService.deleteHotel(id).then(function (res) {
+        HotelService.deleteHotel(id);
 
-            console.log(res);
-
-            $scope.init();
-
-        }, function (err) {
-
-            swal({
-                title: "Ops!",
-                text: '<p>Falta implementar a api...</p>',
-                html:true,
-                allowEscapeKey: true,
-                showConfirmButton: true,
-                showCancelButton: false,
-                confirmButtonColor: "#2CBC5B",
-                confirmButtonText: "OK",
-                customClass: 'swal-wide',
-            }, function (confirm) {
-                if (confirm) {
-                    //document.location.reload();
-                }
-            });
-
-            console.log(err);
-
-        });
+        $scope.getAllHotels();
     }
 
 });

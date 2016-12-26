@@ -30,6 +30,8 @@ app.config(['$stateProvider','$urlRouterProvider',
                 templateUrl : 'templates/admin/deletar.html',
                 controller: 'AdminController'
             });
+
+            $urlRouterProvider.otherwise('/');
     }
 ]);
 
