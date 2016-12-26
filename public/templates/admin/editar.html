@@ -1,7 +1,9 @@
 
     <h1>Editar</h1>
 
-    <form>	
+    <form ng-submit="updateHotel()">	
+
+        <input type="hidden" name="" ng-model="data._id">
    		<div class="row">
    			<div class="col-md-6">
    				<label>Hotel</label>
@@ -32,8 +34,8 @@
     			<input type="text" name="estrelas" class="form-control" ng-model="data.stars">
    			</div>
    		</div>
+
+        <br><br>
+        <input type="submit" name="" class="btn btn-success" value="Salvar">
+    
     </form>
-
-    <br><br>
-
-    <a href="" class="btn btn-success">Salvar</a>
